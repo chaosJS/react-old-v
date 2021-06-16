@@ -2,6 +2,9 @@ import { useState } from 'react';
 import Demo from './demo';
 import Anim from './anim';
 import TodoList from './TodoList';
+import RRTodoList from './RRTodoList';
+import { Provider } from 'react-redux';
+import store from './store';
 function App() {
 	const [num, setNum] = useState(0);
 	const handleRandom = () => {
@@ -16,7 +19,17 @@ function App() {
 			<hr />
 			<Anim />
 			<hr />
-			<TodoList />
+			<div style={{ display: 'flex' }}>
+				<div>
+					<TodoList />
+				</div>
+				<div style={{ marginLeft: '20px' }}>
+					<Provider store={store}>
+						<RRTodoList />
+						{/* <TestList /> */}
+					</Provider>
+				</div>
+			</div>
 		</div>
 	);
 }

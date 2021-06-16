@@ -60,3 +60,11 @@
       3. componentDidUpdate render 之后
       4. componentWillRecieveProps 组件接受了父组件的 props ，只要父组件 render 被重新执行就子组件就执行这个函数
    4. componentWillUnmount 清理副作用
+3. 关于 redux-thunk
+   1. 加了 redux-thunk 的 middleware 之后, action 可以 return 一个函数,这个函数的参数是 store 的 dispatch 方法
+   2. 由于使用 redux-thunk 对 store.dispath 做了增强，所以会调用这个函数类型的 action
+   3. 所以可以在此处增加异步操作
+4. applyMiddleware: middleware 就是对 dispath 方法的一个增强，最初的 dispath 方法只能接受一个对象 action
+   1. 如果传入的是一个函数，那就执行这个函数
+5. redux-saga 的简单使用
+6. react-redux

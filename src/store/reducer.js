@@ -13,7 +13,7 @@ const reducer = (state = defaultState, action) => {
 		case actionType.ADD_TODO:
 			return {
 				...state,
-				todoList: [...state.todoList, action.value],
+				todoList: [...state.todoList, state.inputValue],
 				inputValue: '',
 			};
 		case actionType.DEL_TODO:

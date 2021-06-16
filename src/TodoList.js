@@ -3,13 +3,13 @@ import store from './store';
 import { useEffect, useState } from 'react';
 // import * as actionType from './store/const';
 import {
-	genInitTodoAction,
+	getTodoList,
 	genInputChangeAction,
 	genAddTodoAction,
 	genDelTodoAction,
+	genSagaTodoListAction,
 } from './store/actionCreators';
 import TodoUI from './TodoUI';
-import axios from 'axios';
 
 const TodoList = () => {
 	const [allData, setAllData] = useState({});
@@ -19,7 +19,7 @@ const TodoList = () => {
 	};
 	const handleAdd = () => {
 		if (inputValue) {
-			store.dispatch(genAddTodoAction(inputValue));
+			store.dispatch(genAddTodoAction());
 		}
 	};
 	const handleDel = (index) => {
@@ -32,10 +32,13 @@ const TodoList = () => {
 		return unsubscribe;
 	}, []);
 	useEffect(() => {
-		axios.get('/api/getTodos').then((res) => {
-			const { data } = res.data;
-			store.dispatch(genInitTodoAction(data));
-		});
+		// getTodoList 返回的是一个函数类型的action
+		// 而不是对象类型的aciton
+		// 由于使用redux-thunk对store.dispath做了增强，所以会调用这个函数类型的action
+		// store.dispatch(getTodoList());
+
+		// use  saga
+		store.dispatch(genSagaTodoListAction());
 	}, []);
 
 	return (
